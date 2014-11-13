@@ -6,7 +6,7 @@ var NowPlayingView = Backbone.View.extend({
   },
 
   render: function(title){
-    return this.$el.html(title || 'Pick a song! (or double-click to enqueue)');
+    return this.$el.html(title || 'Pick a song!');
   },
 
   setNowPlaying: function(song){

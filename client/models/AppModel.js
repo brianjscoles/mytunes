@@ -24,10 +24,17 @@ var AppModel = Backbone.Model.extend({
 
       //enqueue the song that just reported an "enqueue" event
       this.get('songQueue').enqueue(song);
-      console.log(this.get('songQueue'));
 
     }, this);
 
+    params.library.on('finished', function(song){
+      console.log("AppModel knows that " + song.get('title') + " has finished... dequeueing next song.");
+      
+      //dequeue and play next song
+      this.set('currentSong',this.get('songQueue').dequeue());
+
+
+    }, this);
   }
 
 
