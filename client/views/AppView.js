@@ -7,10 +7,16 @@ var AppView = Backbone.View.extend({
     this.songQueueView = new SongQueueView({collection: this.model.get('songQueue')});
     this.nowPlayingView = new NowPlayingView({model: this.model.get('currentSong')});
 
-    this.model.on('change:currentSong', function(model){
+    this.model.on('update', function(model){
       this.playerView.setSong(model.get('currentSong'));
       this.nowPlayingView.setNowPlaying(model.get('currentSong'));
     }, this);
+
+    //   this.listenTo('songQueue','dequeue', function(model){
+    //   console.log('this triggers?');
+    //   this.playerView.setSong(model.get('currentSong'));
+    //   this.nowPlayingView.setNowPlaying(model.get('currentSong'));
+    // }, this);
   },
 
   render: function(){
