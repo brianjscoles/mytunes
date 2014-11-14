@@ -20,6 +20,16 @@ var AppModel = Backbone.Model.extend({
       this.set('currentSong', song);
       this.trigger('update',this);
     }, this);
+    console.log(this.get('songQueue'));
+
+    this.get('songQueue').on('play', function(song){
+      console.log("now playing " + song.get('title'));
+
+      //set current song to the one that just reported a "play" event
+      this.set('currentSong', song);
+      this.trigger('update',this);
+    }, this);
+
 
     // this.model.on('update', function(model){
     //   this.playerView.setSong(model.get('currentSong'));
@@ -30,7 +40,7 @@ var AppModel = Backbone.Model.extend({
       console.log("AppModel requests enqueue of " + song.get('title'));
 
       //enqueue the song that just reported an "enqueue" event
-      this.get('songQueue').enqueue(song);
+      this.get('songQueue').enqueue(song.clone()); console.log(this.get('songQueue'));
       if(this.get('currentSong').get('title')===undefined){
         this.set('currentSong',this.get('songQueue').dequeue());
       }

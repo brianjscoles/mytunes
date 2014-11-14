@@ -19,10 +19,9 @@ var SongQueue = Songs.extend({
   dequeue:function(){
     var nextSong = this.at(0);
     this.remove(this.at(0));
-    if(nextSong){
-      nextSong.play();
-      return nextSong;
-    }
+    nextSong.play();
+    return nextSong;
+
   },
 
 
